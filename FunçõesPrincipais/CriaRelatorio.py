@@ -8,34 +8,15 @@ Cliente = Query()
 
 def criaRelatorio(interface, id):
     interface.withdraw()
-    def formatoData(produto):
-            data = {
-                    "Quantidade": [produto['quantity'], 
-                                produto['quantityAndaimes'], 
-                                produto['quantityBetoneira'], 
-                                produto['quantityPlataforma'], 
-                                produto['quantityRoldana'], 
-                                produto['quantityRegulador']],
-                    "Preço(1 Unidade)": [produto['valueEscora'],
-                                        produto['valueAndaimes'],
-                                        produto['valueBetoneira'],
-                                        produto['valuePlataforma'],
-                                        produto['valueRoldana'],
-                                        produto['valueRegulador']],
-                    "Tamanho": [produto['sizeEscora'], 
-                                "-", 
-                                "-", 
-                                produto['sizePlataforma'], 
-                                "-",
-                                "-"]
-                }
-            return data
-    try:
-        produto = db.get(Cliente.id == int(id))
-        df = pd.DataFrame(formatoData(produto), index = ["Escora", "Andaime", "Betoneira", "Plataforma", "Roldana", "Regulador"])
-        df.to_excel(f"C:\\Users\\vinic\\OneDrive\\Documentos\\Área de Trabalho\\DocumentosClientes\\RelatoriosClientes\\resumo{produto['nome']}.xlsx")
-        mostraMensagem("Açao bem-sucedida!", "O resumo do contrato foi criado com sucesso!")
-        interface.deiconify()
-    except OSError:
-        mostraMensagem("Erro!", "Não foi possível criar o relatório do cliente.")
-        interface.deiconify()
+    janela = CTkToplevel()
+    janela.resizable(False, False)
+    janela.geometry("740x400")
+    janela.title("Relatórios")
+    textoAviso = CTkLabel(janela, text="Clique em um dos botões para fazer a ação desejada!", font=("roboto", 20), text_color=corFonte)
+    textoAviso.grid(padx=10, pady=13)
+
+    janela.configure(fg_color=corInterfacePrincipal)
+    frame = CTkFrame(janela, width=570, height=160, fg_color=corFundoFrame, border_color=corBordas, border_width=2)
+    frame.grid(padx=25, pady=30)
+
+    criaBotao(frame, "Devolução de Escoras", funçaoDevolveEscoras, 0, 0)

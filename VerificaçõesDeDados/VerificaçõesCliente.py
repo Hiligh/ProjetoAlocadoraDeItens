@@ -6,30 +6,13 @@ from VerificaçõesDeDados.VerificaçõesEntrada import verificaçãoNUMERO
 
 db = TinyDB('DB.json')
 
-#verifica cliente no DB.json
-def existeCliente(cpf: str):
-    el = db.all()
-    existe = 0
-    for i in range(len(db)):
-        cliente = el[i]
-        if(cliente['cpf'] == cpf):
-            existe = 1
-            break
-        else:
-            existe = 0
-    if(existe == 1):
-        return cpf
-    else:
-        return 0
-
-def existeMultiplosContratos(cpf):
-    cont = 0
+def existeMultiplosContratos(nome):
     el = db.all()
     for i in range(len(db)):
         clientes = el[i]
-        if(clientes['cpf'] == cpf):
-            cont += 1
-    return cont
+        if(clientes['nome'].lower() == nome.lower()):
+            print(clientes['id'])
+    return 0
 
 def mostraContratosMesmoCliente(cpf, interface):
     interface.withdraw()

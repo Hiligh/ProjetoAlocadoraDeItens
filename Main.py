@@ -84,7 +84,7 @@ def main():
         resetaWidgets(frameTabela)
         mostraClientesNoFrame(frameTabela, interfacePrincipal)
 
-    criaBotao(frameEsquerdoPrincipal, "Insere Cliente", lambda: insereClientesEReseta(), 0, 0)
+    criaBotao(frameEsquerdoPrincipal, "Criar Contrato", lambda: insereClientesEReseta(), 0, 0)
 
     criaBotao(frameEsquerdoPrincipal, "Ver Estoque Disponível", lambda: EstoqueDisponivel(interfacePrincipal), 1, 0)
 

@@ -58,6 +58,7 @@ def devolução(interface, id):
             pass
         else:
             return 0
+        
         funçaoDevolveProduto("Digite quantos andaimes serão devolvidos", 'quantityAndaimes', "Os andaimes foram devolvidos com sucesso para o estoque!", id)
         janela.deiconify()
 
@@ -68,6 +69,7 @@ def devolução(interface, id):
             pass
         else:
             return 0
+        
         funçaoDevolveProduto("Digite quantas betoneiras serão devolvidas", 'quantityBetoneira', "A(s) betoneira(s) foram devolvidos com sucesso para o estoque!", id)
         janela.deiconify()
 
@@ -100,6 +102,7 @@ def devolução(interface, id):
             pass
         else:
             return 0
+        
         funçaoDevolveProduto("Digite quantos reguladores serão devolvidos", 'quantityRegulador', "Os reguladores foram devolvidos com sucesso para o estoque!", id)
         janela.deiconify()
 
