@@ -7,7 +7,7 @@ from tinydb import Query
 
 Cliente = Query()
 
-#faz a devoluçao de escoras pelo cpf do cliente
+#faz a devoluçao de escoras pelo id do cliente
 def devolução(interface, id):
     interface.withdraw()
     janela = CTkToplevel()
@@ -114,6 +114,7 @@ def devolução(interface, id):
         janela.destroy()
         interface.deiconify()
     criaBotao(frame, "Voltar para o Inicio", fechaJanela, 2, 1)
+    
     janela.protocol("WM_DELETE_WINDOW", fechaJanela)
 
     def devolveProdutoPorId(id: str, tipoDevoluçao: str, valorAlterado: int):

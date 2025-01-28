@@ -48,6 +48,12 @@ def insereClientes(interface):
     janelasCadastro.grid_columnconfigure(0, weight=1)  # Configura a coluna dentro da aba
     janelasCadastro.grid_rowconfigure(0, weight=1)     # Configura a linha dentro da aba
 
+    def fechaJanela():
+        interfaceUsuario.destroy()
+        interface.deiconify()
+
+    interfaceUsuario.protocol("WM_DELETE_WINDOW", fechaJanela)
+
     def confirmaContrato(janela, framePrincipal):
         try:
             nomeCliente = verificaçãoNome(nomeClienteEntry.get())
