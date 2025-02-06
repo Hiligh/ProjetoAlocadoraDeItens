@@ -6,9 +6,9 @@ from FunçõesPrincipais.ValoresProdutos import *
 from datetime import date
 from Interface.MostraMensagem import *
 from VerificaçõesDeDados.VerificaçõesEstoque import *
-from tinydb import Query
-from customtkinter import CTk, CTkScrollableFrame
+from tinydb import Query, TinyDB
 
+db = TinyDB('DB.json')
 Cliente = Query()
 
 def insereClientes(interface):
@@ -82,6 +82,10 @@ def insereClientes(interface):
 
             formaPagamento = formaPagamentoEntry.get()
 
+            numeroContrato = verificaçãoNUMERO(numeroContratoEntry.get()) or 0
+
+            idCliente = defineId()
+
             db.insert(
                 {
                     'nome': nomeCliente,
@@ -96,7 +100,7 @@ def insereClientes(interface):
                     'todayDate': diaAtual,
                     'paymentDate': duraçaoContrato,
                     'formPayment': formaPagamento,
-                    'quantityAndaimes': quantidadeAndaime,
+                    'quantityAndaime': quantidadeAndaime,
                     'valueAndaimes': valorAndaime,
                     'sizeAndaime': tamanhoAndaime,
                     'id': idCliente,
@@ -109,7 +113,8 @@ def insereClientes(interface):
                     'quantityPlataforma': quantidadePlataforma,
                     'valuePlataforma': valorPlataforma,
                     'sizePlataforma': tamanhoPlataforma,
-                    'statePayment': "Pendente"
+                    'statePayment': "Pendente",
+                    'contractNumber': numeroContrato
                 }
             )
 
@@ -127,6 +132,11 @@ def insereClientes(interface):
         except AttributeError:
             interfaceUsuario.destroy()
             interface.deiconify()
+    
+    def fechaJanela():
+        interfaceUsuario.destroy()
+        interface.deiconify()
+    interfaceUsuario.protocol("WM_DELETE_WINDOW", fechaJanela)
 
     #Tab de Cliente
     nomeClienteLabel = CTkLabel(janelasCadastro.tab("Cliente"), text="Nome do Cliente:", text_color=corFonte, font=("roboto", 17))
@@ -171,9 +181,13 @@ def insereClientes(interface):
     formaPagamentoEntry = CTkEntry(janelasCadastro.tab("Cliente"), width=300, height=38, placeholder_text="Digite aqui...", corner_radius=10, fg_color=corFundoFrame, text_color=corFonte, placeholder_text_color="#DAD8DF", font=("roboto", 17))
     formaPagamentoEntry.grid(row=5, column=1, padx=150, pady=10)
 
-    #Fim Tab de Cliente
+    numeroContratoLabel = CTkLabel(janelasCadastro.tab("Cliente"), text="Número do Contrato:", text_color=corFonte, font=("roboto", 17))
+    numeroContratoLabel.grid(row=6, column=1, padx=150)
 
-    idCliente = defineId()
+    numeroContratoEntry = CTkEntry(janelasCadastro.tab("Cliente"), width=300, height=38, placeholder_text="Digite aqui...", corner_radius=10, fg_color=corFundoFrame, text_color=corFonte, placeholder_text_color="#DAD8DF", font=("roboto", 17))
+    numeroContratoEntry.grid(row=7, column=1, padx=150, pady=10)
+
+    #Fim Tab de Cliente
 
     #Tab de Produtos
     if verificaçãoEstoque(escoras, 'quantity', "escoras") == 0:
@@ -227,7 +241,7 @@ def insereClientes(interface):
         preçoEscoraEntry = CTkEntry(janelasCadastro.tab("Preços"), width=320, height=38, placeholder_text="Digite aqui...", corner_radius=10, fg_color=corFundoFrame, text_color=corFonte, placeholder_text_color="#DAD8DF", font=("roboto", 17))
         preçoEscoraEntry.grid(row=1, padx=120, pady=10)
 
-    if verificaçãoEstoque(andaimes, 'quantityAndaimes', "andaimes") == 0:
+    if verificaçãoEstoque(andaimes, 'quantityAndaime', "andaimes") == 0:
         andaimesLabel = CTkLabel(
             janelasCadastro.tab("Produtos"), 
             text="(Nenhum andaime disponível no momento!)",
@@ -267,7 +281,7 @@ def insereClientes(interface):
         )
         preçoAndaimeEntry.grid(row=3, padx=120, pady=10)
     else:
-        andaimesLabel = CTkLabel(janelasCadastro.tab("Produtos"), text="Digite a quantidade de andaimes que vão ser alugados:\n({} andaimes disponíveis)".format(mostraEstoqueDisponivel(andaimes, "quantityAndaimes")), text_color=corFonte, font=("roboto", 17))
+        andaimesLabel = CTkLabel(janelasCadastro.tab("Produtos"), text="Digite a quantidade de andaimes que vão ser alugados:\n({} andaimes disponíveis)".format(mostraEstoqueDisponivel(andaimes, "quantityAndaime")), text_color=corFonte, font=("roboto", 17))
         andaimesLabel.grid(row=2, padx=100)
 
         andaimesEntry = CTkEntry(janelasCadastro.tab("Produtos"), width=320, height=38, placeholder_text="Digite aqui a quantidade de andaimes", corner_radius=10, fg_color=corFundoFrame, text_color=corFonte, placeholder_text_color="#DAD8DF", font=("roboto", 17))

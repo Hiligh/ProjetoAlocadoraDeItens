@@ -1,12 +1,13 @@
-from tinydb import TinyDB, Query
+from tinydb import Query
 from Interface.CoresInterface import *
 from customtkinter import *
 from Interface.CriaBotao import criaBotao
 from VerificaçõesDeDados.VerificaçõesEntrada import *
 from Interface.MostraMensagem import *
 from Interface.CriaPerguntas import criaPerguntas
+from VerificaçõesDeDados.VerificaçõesCliente import db
 
-db = TinyDB('DB.json')
+
 Cliente = Query()
 
 #altera os valores de cada cliente pelo cpf        
@@ -39,7 +40,7 @@ def alteraClientes(interface, id):
 
     criaBotao(frame, "Forma de Pagamento", lambda: alteracaoC("formPayment", "Forma de Pagamento", janela, interface, fazNada, id), 3, 0)
 
-    criaBotao(frame, "Quantidade de Andaimes", lambda: alteracaoC("quantityAndaimes", "Quantidade de Andaimes", janela, interface, verificaçãoNUMERO, id), 3, 1)
+    criaBotao(frame, "Quantidade de Andaimes", lambda: alteracaoC("quantityAndaime", "Quantidade de Andaimes", janela, interface, verificaçãoNUMERO, id), 3, 1)
 
     criaBotao(frame, "Valor do Andaime", lambda: alteracaoC("valueAndaimes", "Valor do Andaime", janela, interface, verificaçãoNUMERO, id), 4, 1)
 

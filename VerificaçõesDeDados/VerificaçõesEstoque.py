@@ -28,7 +28,7 @@ def EstoqueDisponivel(interface):
     for i in range(len(db)):
         estoque = el[i]
         somaEscoras += int(estoque['quantity'])
-        somaAndaimes += int(estoque['quantityAndaimes'])
+        somaAndaimes += int(estoque['quantityAndaime'])
         somaBetoneiras += int(estoque['quantityBetoneira'])
         somaRoldanas += int(estoque['quantityRoldana'])
         somaPlataformas += int(estoque['quantityPlataforma'])

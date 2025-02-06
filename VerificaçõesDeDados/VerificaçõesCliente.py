@@ -30,7 +30,7 @@ def mostraContratosMesmoCliente(cpf, interface):
     for i in range(len(db)):
         dados = el[i]
         if(cpf == dados['cpf']):
-            texto = CTkLabel(frame, text=f"{dados['id']} - O Cliente {dados['nome']} alugou os seguintes produtos: \n{dados['quantity']} escoras, {dados['quantityAndaimes']} andaimes, {dados['quantityBetoneira']} betoneiras, {dados['quantityPlataforma']} plataformas, {dados['quantityRoldana']} roldanas e {dados['quantityRegulador']} reguladores.\n Período de Contrato: {dados['todayDate']} a {dados['paymentDate']}\n Estado do Pagamento: {dados['statePayment']}", font=("roboto", 20), text_color=corFonte)
+            texto = CTkLabel(frame, text=f"{dados['id']} - O Cliente {dados['nome']} alugou os seguintes produtos: \n{dados['quantity']} escoras, {dados['quantityAndaime']} andaimes, {dados['quantityBetoneira']} betoneiras, {dados['quantityPlataforma']} plataformas, {dados['quantityRoldana']} roldanas e {dados['quantityRegulador']} reguladores.\n Período de Contrato: {dados['todayDate']} a {dados['paymentDate']}\n Estado do Pagamento: {dados['statePayment']}", font=("roboto", 20), text_color=corFonte)
             texto.grid(row=contadorLinha, column=0, padx=15, pady=9)
             contadorLinha += 1
 

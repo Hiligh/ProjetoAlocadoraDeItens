@@ -67,15 +67,15 @@ def menuOpcoesUsuario(id, interfacePrincipal):
         interfacePrincipal.deiconify()
 
 def mostraWidgetsNoFrame(frameTabela, cliente):
-    criaFrameProduto(frameTabela, f"Quantidade de Escoras\n\n{cliente['quantity']}", corInterfacePrincipal, corFonte, 0, 0)
+    criaFrameProduto(frameTabela, f"Quant. Escoras {cliente['sizeEscora']} Metro\n\n{cliente['quantity']}", corInterfacePrincipal, corFonte, 0, 0)
 
-    criaFrameProduto(frameTabela, f"Quantidade de Andaimes\n\n{cliente['quantityAndaimes']}", corInterfacePrincipal, corFonte, 1, 0)
+    criaFrameProduto(frameTabela, f"Quant. Andaimes {cliente['sizeAndaime']} Metro\n\n{cliente['quantityAndaime']}", corInterfacePrincipal, corFonte, 1, 0)
 
     criaFrameProduto(frameTabela, f"Quantidade de Betoneiras\n\n{cliente['quantityBetoneira']}", corInterfacePrincipal, corFonte, 2, 0)
 
     criaFrameProduto(frameTabela, f"Quantidade de Roldanas\n\n{cliente['quantityRoldana']}", corInterfacePrincipal, corFonte, 0, 1)
 
-    criaFrameProduto(frameTabela, f"Quantidade de Plataformas\n\n{cliente['quantityPlataforma']}", corInterfacePrincipal, corFonte, 1, 1)
+    criaFrameProduto(frameTabela, f"Quant. Plataformas {cliente['sizePlataforma']} Metro\n\n{cliente['quantityPlataforma']}", corInterfacePrincipal, corFonte, 1, 1)
 
     criaFrameProduto(frameTabela, f"Quantidade de Reguladores\n\n{cliente['quantityRegulador']}", corInterfacePrincipal, corFonte, 2, 1)
 

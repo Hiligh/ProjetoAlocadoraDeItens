@@ -1,10 +1,12 @@
+from datetime import date
 from customtkinter import *
 from Interface.CoresInterface import *
 from Interface.CriaPerguntas import *
 from Interface.MostraMensagem import *
 from VerificaçõesDeDados.VerificaçõesCliente import *
-from tinydb import Query
+from tinydb import Query, TinyDB
 
+devolucao = TinyDB('devoluçõesClientes.json')
 Cliente = Query()
 
 #faz a devoluçao de escoras pelo cpf do cliente
@@ -53,13 +55,13 @@ def devolução(interface, id):
     
     def funçaoDevolveAndaimes():
         janela.withdraw()
-        teste = validaDevolução('quantityAndaimes')
+        teste = validaDevolução('quantityAndaime')
         if(teste):
             pass
         else:
             return 0
         
-        funçaoDevolveProduto("Digite quantos andaimes serão devolvidos", 'quantityAndaimes', "Os andaimes foram devolvidos com sucesso para o estoque!", id)
+        funçaoDevolveProduto("Digite quantos andaimes serão devolvidos", 'quantityAndaime', "Os andaimes foram devolvidos com sucesso para o estoque!", id)
         janela.deiconify()
 
     def funçaoDevolveBetoneiras():
@@ -122,4 +124,23 @@ def devolução(interface, id):
     def devolveProdutoPorId(id: str, tipoDevoluçao: str, valorAlterado: int):
         cliente = db.get(Cliente.id == int(id))         
         conta = int(cliente[tipoDevoluçao]) - valorAlterado
-        db.update({tipoDevoluçao: conta}, Cliente.id == int(id))
+        db.update({tipoDevoluçao: str(conta)}, Cliente.id == int(id))
+
+        devolucao_table = devolucao.table('_default')  # Ou o nome correto da tabela
+        devolucaoMensal_table = devolucao.table('devolucaoMensal')
+
+        # Dados a serem inseridos
+        dados_devolucao = {
+            'id': int(id),
+            'tipoDevolucao': str(tipoDevoluçao),
+            'quantidadeDevolvida': str(valorAlterado),
+            'quantidadeRestante': str(conta),
+            'dataDevolucao': date.today().strftime('%d/%m/%Y')
+        }
+
+        # Insere os dados corretamente
+        devolucao_table.insert(dados_devolucao)
+        devolucaoMensal_table.insert(dados_devolucao)
+
+
+        

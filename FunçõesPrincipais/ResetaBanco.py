@@ -6,6 +6,7 @@ from Interface.MostraMensagem import *
 from tinydb import TinyDB
 
 db = TinyDB('DB.json')
+devolucao = TinyDB('devoluçõesClientes.json')
 
 #apaga todos os clientes no DB.json
 def resetaBanco(interface):
@@ -24,7 +25,8 @@ def resetaBanco(interface):
         try:
             awnser = criaPerguntas("CUIDADO!, Ação perigosa", "Voce realmente deseja apagar todos os clientes registrados?\nDigite o número que corresponde a ação:\n1 - SIM / 2 - NAO", verificaçãoNUMERO)
             if(awnser == '1'):
-                db.truncate();
+                db.truncate()
+                devolucao.truncate()
                 janela.destroy()
                 interface.deiconify()
                 mostraMensagem("Açao bem-sucedida", "Todos os clientes foram apagados com sucesso!")
